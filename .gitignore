@@ -57,6 +57,7 @@ target/
 local/
 include/
 bin/
+share/
 
 # pycharm
 .idea/
