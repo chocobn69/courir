@@ -6,6 +6,13 @@ import os
 import sys
 
 try:
+    import configparser
+    from configparser import NoOptionError
+except ImportError:
+    import ConfigParser as configparser
+    from ConfigParser import NoOptionError
+
+try:
     from .logging_dev import LogConfig
 except ImportError:
     from .logging_prod import LogConfig
@@ -33,3 +40,23 @@ class Cli(object):
         else:
             logging.basicConfig(level=logging.ERROR)
             logger.setLevel(logging.ERROR)
+
+        # we need the config file
+        try:
+            config = configparser.ConfigParser()
+            config.read_file(open(configfile))
+
+            access_key_id = config.get('runabove', 'access_key_id')
+            if access_key_id is None or len(access_key_id) == 0:
+                raise UsageError('access_key_id not found in %s' % configfile)
+
+            secret_access_key = config.get('runabove', 'secret_access_key')
+            if secret_access_key is None or len(secret_access_key) == 0:
+                raise UsageError('secret_access_key not found in %s' % configfile)
+
+            ssh_user = config.get('runabove', 'ssh_user')
+            ssh_port = config.get('runabove', 'ssh_port')
+        except IOError:
+            raise UsageError('%s config file not found' % configfile)
+        except configparser.NoSectionError:
+            raise UsageError('section %s not found in config file %s' % ('runabove', configfile))
