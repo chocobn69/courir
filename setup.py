@@ -13,6 +13,7 @@ setup(name='courir',
       scripts=['scripts/sergent'],
       install_requires=[
           'python-runabove>=1.3',
+          'click>=4'
       ],
       classifiers=[
           #  How mature is this project? Common values are
