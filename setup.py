@@ -9,11 +9,12 @@ setup(name='courir',
       author='Nicolas Baccelli',
       author_email='nicolas.baccelli@gmail.com',
       url='https://github.com/chocobn69/courir',
-      packages=['sergent', ],
-      scripts=['scripts/sergent'],
+      packages=['courir', ],
+      scripts=['scripts/courir'],
       install_requires=[
           'python-runabove>=1.3',
-          'click>=4'
+          'click>=4',
+          'paramiko>=1.15.2'
       ],
       classifiers=[
           #  How mature is this project? Common values are
