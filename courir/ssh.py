@@ -133,6 +133,17 @@ class CourirSsh(object):
         self._secret_access_key = secret_access_key
         self._consumer_key = consumer_key
 
+    def list_ssh_key(self):
+        """
+        list ssh key on runabove
+        :return:
+        """
+        runa = Runabove(
+            self._access_key_id,
+            self._secret_access_key,
+            consumer_key=self._consumer_key)
+        return runa.ssh_keys.list()
+
     def get_instances_by_name(self, name):
         """
         :param name:name of the instance you want to connect to

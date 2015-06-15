@@ -123,6 +123,9 @@ class Cli(object):
                 sys.exit(0)
 
             instance_chosen = instances[choosen_one - 1]
+            # we have to list ssh_key before getting the good one, don't know why
+            ssh.list_ssh_key()
+
             ssh_key_name = instance_chosen.ssh_key.name
 
             return ssh.connect(instance=instance_chosen,
